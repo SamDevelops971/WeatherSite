@@ -1,7 +1,7 @@
 Fairy Tail Inspired Weather Application
 
 
-A cozy weather website based off of my favorite anime, Fairy Tail. Rather than relying on traditonla weather app UI, current weather is displayed using 3 frame pixel art animations 
+A cozy weather website based off of my favorite anime, Fairy Tail. Rather than relying on traditonal weather app UI, current weather is displayed using 3 frame pixel art animations 
 
 Weather Events
 - Rain 
@@ -28,7 +28,6 @@ What I learned
 - Creating animations using PNGs
 - Translating weather into visualizations.
 
-Examples
 <img width="320" height="180" alt="rain1" src="https://github.com/user-attachments/assets/d9810836-64af-45a2-919f-e7b202180421" />
 
 <img width="320" height="180" alt="nighttime3fixed" src="https://github.com/user-attachments/assets/bd6b7b86-fdb7-4190-9e13-94505d1b10e8" />
