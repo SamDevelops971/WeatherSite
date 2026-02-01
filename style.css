@@ -1,0 +1,29 @@
+body {
+    
+}
+
+
+.weather-info {
+    justify-content: space-between;
+    display: flex;
+    font-family: 'Pixelify Sans';font-size: 16px;
+    font-size: 18px;
+    color: purple;
+    background-color: lightblue;
+    padding: 10px;
+    position: relative;
+}
+
+.weather-animation {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 640px;
+    height: 360px;
+    background-image: url("weatherImages/snow3.png");
+    background-size: cover;
+    background-position: center;
+    image-rendering: pixelated;
+    aspect-ratio: 16/9;
+}
+
