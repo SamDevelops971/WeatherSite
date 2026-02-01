@@ -1,29 +1,58 @@
 body {
-    
+    height: 100%;
+    margin: 0;
+    background-color: cornflowerblue;
 }
 
+.weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
 .weather-info {
+    width: 620px;
     justify-content: space-between;
+    align-items: center;
     display: flex;
-    font-family: 'Pixelify Sans';font-size: 16px;
+    font-family: 'Pixelify Sans';
     font-size: 18px;
-    color: purple;
+    color: deepskyblue;
     background-color: lightblue;
     padding: 10px;
-    position: relative;
 }
 
+.gemini {
+    position: absolute;
+    right: 128px;
+    top: 268px;
+    padding: 10px;
+    font-family: 'Pixelify Sans';
+    font-size: 20px;
+}
+
+#fahrenheit, #celsius{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    font-family: 'Pixelify Sans';font-size: 16px;
+    color: deepskyblue;
+    image-rendering: crisp-edges;
+    box-shadow: 0px 3px honeydew, 0px -3px honeydew, -3px 0px honeydew, 3px 0px honeydew;
+    background-color: honeydew;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
 .weather-animation {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
     width: 640px;
     height: 360px;
     background-image: url("weatherImages/snow3.png");
     background-size: cover;
     background-position: center;
     image-rendering: pixelated;
-    aspect-ratio: 16/9;
 }
 
