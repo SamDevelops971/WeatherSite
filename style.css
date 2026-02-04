@@ -27,13 +27,13 @@ body {
 .gemini {
     position: absolute;
     right: 128px;
-    top: 268px;
+    top: 250px;
     padding: 10px;
     font-family: 'Pixelify Sans';
     font-size: 20px;
 }
 
-#fahrenheit, #celsius{
+#fahrenheit, #celsius {
     width: 40px;
     height: 40px;
     margin: 5px;
@@ -46,6 +46,19 @@ body {
     cursor: pointer;
 }
 
+#location {
+  width: 80px;
+  font-family: 'Pixelify Sans';font-size: 16px;
+    color: deepskyblue;
+    image-rendering: crisp-edges;
+    box-shadow: 0px 3px honeydew, 0px -3px honeydew, -3px 0px honeydew, 3px 0px honeydew;
+    background-color: honeydew;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 15px;
+}
+
 
 .weather-animation {
     width: 640px;
@@ -56,3 +69,28 @@ body {
     image-rendering: pixelated;
 }
 
+.tempAndLocation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CityAndTime {
+    display: flex
+}
+
+#city, #time {
+    margin: 3px
+}
+
+.specifics {
+    position: absolute;
+    top: 264px;
+    left: 135px;
+    font-family: 'Pixelify Sans';font-size: 16px;
+    border: 2px solid honeydew;
+    width: 150px;
+    font-size: 10px;
+    background: rgba(0,0,0,0.5); /* dark overlay */
+
+}
