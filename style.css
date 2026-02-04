@@ -27,7 +27,7 @@ body {
 .gemini {
     position: absolute;
     right: 128px;
-    top: 250px;
+    top: 237px;
     padding: 10px;
     font-family: 'Pixelify Sans';
     font-size: 20px;
@@ -86,11 +86,12 @@ body {
 .specifics {
     position: absolute;
     top: 264px;
-    left: 135px;
+    left: 117px;
     font-family: 'Pixelify Sans';font-size: 16px;
     border: 2px solid honeydew;
     width: 150px;
     font-size: 10px;
     background: rgba(0,0,0,0.5); /* dark overlay */
+    color: white;
 
 }

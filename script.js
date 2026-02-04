@@ -1,18 +1,20 @@
 const temp = document.getElementById("temperature")
 const fahr = document.getElementById("fahrenheit")
 const cel = document.getElementById("celsius")
-const lat = 40.7128
-const long = -70.006
+const myspot = document.getElementById("location")
+const defaultLat = 40.7128
+const defaultLong = -74.006
 //New York as Default City
 const clock = document.getElementById("time")
 const local = document.getElementById("city")
 const specific = document.getElementById("message")
 let currentFrame = 0;
-const animation = document.querySelector(".weather-animation");
-const sunny = ["daytime1fixed.png", "daytime2.fixed", "daytime3.png"]
+const animation = document.querySelector('.weather-animation');
+const sunny = ["daytime1fixed.png", "daytime2fixed.png", "daytime3fixed.png"]
 const night = ["nighttime1fixed.png", "nighttime2fixed.png", "nighttime3fixed.png"]
 const rain = ["rain1.png", "rain2.png", "rain3.png"]
 const snow = ["snow1.png", "snow2.png", "snow3.png"]
+let latestWeather = null;
 
 async function getWeather(lat,lon) {
     const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,is_day,rain,showers,snowfall,precipitation&timezone=auto&forecast_days=1&temperature_unit=fahrenheit&precipitation_unit=inch`
@@ -30,7 +32,6 @@ async function getLocation(lat,lon) {
     const response = await fetch(geoURL)
     const data = await response.json();
     console.log(data)
-
     return data
   }
 
@@ -46,22 +47,23 @@ async function getLocation(lat,lon) {
 
 
 
-async function startApp() {
+async function startApp(lat, lon) {
   const weatherData = await getWeather(lat,lon)
   const locationData = await getLocation(lat,lon)
+  latestWeather = weatherData
 
-  if (weatherData.current.is_day == 0 && weatherData.current.precipitation == 0) {
-
-  }
+  local.textContent = locationData.addresses[0].address.municipality
+  const tempy = weatherData.current.temperature_2m
+  temp.textContent = tempy + "°F";
+  weatherAnimation(weatherData)
+  updateClock(weatherData.timezone)
 
 }
 
 function animate(sky) {
-  animationDiv.style.backgroundImage = `weatherImages/${sky[currentFrame]}`
-  currentFrame = (currentFrame + 1) % sky.length
+  animation.style.backgroundImage = `url('weatherImages/${sky[currentFrame]}')`;
+    currentFrame = (currentFrame + 1) % sky.length;
 }
-
-setInterval(animate, 1500)
 
 function weatherAnimation(weatherData) {
     const timeOfDay = weatherData.current.is_day
@@ -69,20 +71,61 @@ function weatherAnimation(weatherData) {
     const rain = weatherData.current.rain
     const snow = weatherData.current.snowfall
     const dominant = weatherData.current.weather_code
-    const currentTemp = weatherData.current.temperature_2m
     
     if (timeOfDay == 1 && precip == 0) {
-        animate(sunny)
+        sky = sunny
         specific.textContent = "Have A Good Day!"
-    } else if (timeofDay == 0 && precip == 0) {
-        animate(night)
+    } else if (timeOfDay == 0 && precip == 0) {
+        sky = night
         specific.textContent = "Sweet Dreams"
     } else if ((dominant >= 51 && dominant <= 67) || (dominant >=80 && dominant <= 82)) {
-        animate(rain)
+        sky = rain
+        specific.textContent = "Stay Cozy! If you're out I recommend an umbrella."
     } else if ((dominant >= 71 && dominant <= 77) || (dominant >= 85 && dominant <= 86)) {
-        animate(snow)
+        sky = snow
+        specific.textContent = "Hot chocolate would be great right now"
     } else if (dominant >= 95 && dominant <= 99) {
-        animate(rain)
+        sky = rain
+        specific.textContent = "Laxus...? (Thunder skies. Be Safe!)"
+    }
+    if (sky) {
+      setInterval(() => animate(sky), 1200);
     }
 }
+
+function convertToFahrenheit(weatherData) {
+      currentTemp = weatherData.current.temperature_2m
+      curentTemp = currentTemp.toFixed(1)
+      temp.textContent = currentTemp + "°F";
+  }
+
+function convertToCelsius(weatherData) {
+    currentTemp = (weatherData.current.temperature_2m - 32) * 5/9
+    currentTemp = currentTemp.toFixed(1)
+    temp.textContent = currentTemp + "°C";
+}
+
+function getCoords() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition( (position) => {
+      const lat = position.coords.latitude
+      const lon = position.coords.longitude
+      startApp(lat,lon)
+    }, () => {
+      startApp(defaultLat, defaultLong);
+    }
+  );
+  } else {
+    startApp(defaultLat, defaultLong);
+  }
+}
+
+fahr.addEventListener("click", () => convertToFahrenheit(latestWeather))
+cel.addEventListener("click", () => convertToCelsius(latestWeather))
+myspot.addEventListener("click", getCoords)
+
+
+startApp(defaultLat, defaultLong)
+setInterval(startApp, 1800000)
+
 
