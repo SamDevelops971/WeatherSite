@@ -1,0 +1,30 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "Fairy Tail Themed widget-like weather app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamDevelops971/Weather-Site.git"
+  },
+  "keywords": [
+    "weather",
+    "widget",
+    "fairytail",
+    "electron",
+    "creative"
+  ],
+  "author": "Samuel Joseph",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SamDevelops971/Weather-Site/issues"
+  },
+  "homepage": "https://github.com/SamDevelops971/Weather-Site#readme",
+  "devDependencies": {
+    "electron": "^40.1.0"
+  }
+}
