@@ -7,7 +7,7 @@ const defaultLong = -74.006
 //New York as Default City
 const clock = document.getElementById("time")
 const local = document.getElementById("city")
-const specific = document.getElementById("message")
+const specific = document.getElementById("specifics2")
 let currentFrame = 0;
 const animation = document.querySelector('.weather-animation');
 const sunny = ["daytime1fixed.png", "daytime2fixed.png", "daytime3fixed.png"]
@@ -15,6 +15,7 @@ const night = ["nighttime1fixed.png", "nighttime2fixed.png", "nighttime3fixed.pn
 const rain = ["rain1.png", "rain2.png", "rain3.png"]
 const snow = ["snow1.png", "snow2.png", "snow3.png"]
 let latestWeather = null;
+let animationInterval;
 
 async function getWeather(lat,lon) {
     const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,is_day,rain,showers,snowfall,precipitation&timezone=auto&forecast_days=1&temperature_unit=fahrenheit&precipitation_unit=inch`
@@ -54,10 +55,10 @@ async function startApp(lat, lon) {
 
   local.textContent = locationData.addresses[0].address.municipality
   const tempy = weatherData.current.temperature_2m
-  temp.textContent = tempy + "°F";
+  temp.textContent = tempy.toFixed(0) + "°F";
   weatherAnimation(weatherData)
   updateClock(weatherData.timezone)
-
+  setInterval(updateClock, 1000)
 }
 
 function animate(sky) {
@@ -89,19 +90,22 @@ function weatherAnimation(weatherData) {
         specific.textContent = "Laxus...? (Thunder skies. Be Safe!)"
     }
     if (sky) {
-      setInterval(() => animate(sky), 1200);
+      if(animationInterval) {
+        clearInterval(animationInterval)
+      }
+      animationInterval = setInterval(() => animate(sky), 1400)
     }
 }
 
 function convertToFahrenheit(weatherData) {
       currentTemp = weatherData.current.temperature_2m
-      curentTemp = currentTemp.toFixed(1)
+      currentTemp = currentTemp.toFixed(0)
       temp.textContent = currentTemp + "°F";
   }
 
 function convertToCelsius(weatherData) {
     currentTemp = (weatherData.current.temperature_2m - 32) * 5/9
-    currentTemp = currentTemp.toFixed(1)
+    currentTemp = currentTemp.toFixed(0)
     temp.textContent = currentTemp + "°C";
 }
 

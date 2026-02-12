@@ -1,19 +1,32 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, session } = require('electron');
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 640,
-    height: 430,
-   resizable: false,
-  frame: false,
+    height: 455,
+    resizable: false,
+    frame: false,
     webPreferences: {
-     nodeIntegration: true
-  }
+      nodeIntegration: true,
+      contextIsolation: false
+    }
   });
 
-  win.loadFile('index.html')
-}
+  win.loadFile('index.html');
+};
 
 app.whenReady().then(() => {
-  createWindow()
-})
+
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === 'geolocation') {
+        callback(true); // allow it
+      } else {
+        callback(false);
+      }
+    }
+  );
+
+  createWindow();
+});
+

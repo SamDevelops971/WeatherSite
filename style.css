@@ -22,13 +22,13 @@ body {
     color: deepskyblue;
     background-color: lightblue;
     padding: 10px;
-  -webkit-app-region: drag;
 }
 
 .gemini {
-    position: absolute;
-    right: 128px;
-    top: 237px;
+    display: flex;
+    position: relative;
+    left: 570px;
+    top: -25px;
     padding: 10px;
     font-family: 'Pixelify Sans';
     font-size: 20px;
@@ -84,15 +84,14 @@ body {
     margin: 3px
 }
 
-.specifics {
-    position: absolute;
-    top: 264px;
-    left: 117px;
+#specifics2 {
+    display: flex;
+     width: 634px;
+    height: 20px;
+    border: solid white 2px;
+    justify-content: center;
+    color: black;
     font-family: 'Pixelify Sans';font-size: 16px;
-    border: 2px solid honeydew;
-    width: 150px;
-    font-size: 10px;
-    background: rgba(0,0,0,0.5); /* dark overlay */
-    color: white;
-
+    background: rgba(0,0,0,0.1)
 }
+
