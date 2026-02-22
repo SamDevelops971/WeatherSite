@@ -18,7 +18,7 @@ let latestWeather = null;
 let animationInterval;
 
 async function getWeather(lat,lon) {
-    const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,is_day,rain,showers,snowfall,precipitation&timezone=auto&forecast_days=1&temperature_unit=fahrenheit&precipitation_unit=inch`
+      const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,precipitation,is_day&timezone=America%2FNew_York&forecast_days=1`;
     const response = await fetch(weatherURL)
         const data = await response.json()
         console.log(data);
@@ -83,12 +83,15 @@ function weatherAnimation(weatherData) {
     } else if ((dominant >= 51 && dominant <= 67) || (dominant >=80 && dominant <= 82)) {
         sky = rainy
         specific.textContent = "Stay Cozy! If you're out I recommend an umbrella."
-    } else if ((dominant >= 71 && dominant <= 77) || (dominant >= 85 && dominant <= 86)) {
+    } else if ((dominant >= 71 && dominant <= 77) || (dominant >= 85 && dominant <= 86) || (dominant >= 68 && dominant <= 77)) {
         sky = snowy
         specific.textContent = "Hot chocolate would be great right now"
     } else if (dominant >= 95 && dominant <= 99) {
         sky = rainy
         specific.textContent = "Laxus...? (Thunder skies. Be Safe!)"
+    } else {
+      sky = sunny
+      specific.textContent = "Have a good day!"
     }
     if (sky) {
       if(animationInterval) {
@@ -96,6 +99,7 @@ function weatherAnimation(weatherData) {
       }
       animationInterval = setInterval(() => animate(sky), 1400)
     }
+    console.log(dominant)
 }
 
 function convertToFahrenheit(weatherData) {
