@@ -12,8 +12,8 @@ let currentFrame = 0;
 const animation = document.querySelector('.weather-animation');
 const sunny = ["daytime1fixed.png", "daytime2fixed.png", "daytime3fixed.png"]
 const night = ["nighttime1fixed.png", "nighttime2fixed.png", "nighttime3fixed.png"]
-const rain = ["rain1.png", "rain2.png", "rain3.png"]
-const snow = ["snow1.png", "snow2.png", "snow3.png"]
+const rainy = ["rain1.png", "rain2.png", "rain3.png"]
+const snowy = ["snow1.png", "snow2.png", "snow3.png"]
 let latestWeather = null;
 let animationInterval;
 
@@ -72,6 +72,7 @@ function weatherAnimation(weatherData) {
     const rain = weatherData.current.rain
     const snow = weatherData.current.snowfall
     const dominant = weatherData.current.weather_code
+    let sky = null
     
     if (timeOfDay == 1 && precip == 0) {
         sky = sunny
@@ -80,13 +81,13 @@ function weatherAnimation(weatherData) {
         sky = night
         specific.textContent = "Sweet Dreams"
     } else if ((dominant >= 51 && dominant <= 67) || (dominant >=80 && dominant <= 82)) {
-        sky = rain
+        sky = rainy
         specific.textContent = "Stay Cozy! If you're out I recommend an umbrella."
     } else if ((dominant >= 71 && dominant <= 77) || (dominant >= 85 && dominant <= 86)) {
-        sky = snow
+        sky = snowy
         specific.textContent = "Hot chocolate would be great right now"
     } else if (dominant >= 95 && dominant <= 99) {
-        sky = rain
+        sky = rainy
         specific.textContent = "Laxus...? (Thunder skies. Be Safe!)"
     }
     if (sky) {
@@ -131,5 +132,6 @@ myspot.addEventListener("click", getCoords)
 
 startApp(defaultLat, defaultLong)
 setInterval(startApp, 1800000)
+console.log(getWeather(defaultLat, defaultLong))
 
 
