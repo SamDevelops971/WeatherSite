@@ -18,7 +18,8 @@ let latestWeather = null;
 let animationInterval;
 
 async function getWeather(lat,lon) {
-      const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,precipitation,is_day&timezone=America%2FNew_York&forecast_days=1`;
+      //const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,precipitation,is_day&timezone=America%2FNew_York&forecast_days=1`;
+      const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,temperature_2m,is_day&timezone=America%2FNew_York&forecast_days=1&temperature_unit=fahrenheit`;
     const response = await fetch(weatherURL)
         const data = await response.json()
         console.log(data);
