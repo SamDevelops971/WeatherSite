@@ -100,7 +100,6 @@ function weatherAnimation(weatherData) {
       }
       animationInterval = setInterval(() => animate(sky), 1400)
     }
-    console.log(dominant)
 }
 
 function convertToFahrenheit(weatherData) {
